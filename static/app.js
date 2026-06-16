@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearSearchBtn = document.getElementById('clear-search-btn');
     const categoryFilters = document.getElementById('category-filters');
     const sortSelect = document.getElementById('sort-select');
+    const exportCsvBtn = document.getElementById('export-csv-btn');
 
     // Modal
     const tweetModal = document.getElementById('tweet-modal');
@@ -448,6 +449,66 @@ document.addEventListener('DOMContentLoaded', () => {
         searchClearBtn.style.display = 'none';
         renderFeed();
     });
+
+    // Export to CSV helper
+    if (exportCsvBtn) {
+        exportCsvBtn.addEventListener('click', () => {
+            // Get current filtered updates (matching renderFeed logic)
+            let filtered = flattenedUpdates.filter(update => {
+                if (activeCategory === 'all') return true;
+                if (activeCategory === 'feature') return update.type.toLowerCase() === 'feature';
+                if (activeCategory === 'issue') return update.type.toLowerCase() === 'issue';
+                return update.type.toLowerCase() !== 'feature' && update.type.toLowerCase() !== 'issue';
+            });
+
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                filtered = filtered.filter(update => {
+                    return update.text.toLowerCase().includes(query) || 
+                           update.type.toLowerCase().includes(query) ||
+                           update.date.toLowerCase().includes(query);
+                });
+            }
+
+            filtered.sort((a, b) => {
+                if (activeSort === 'newest') return b.timestamp - a.timestamp;
+                return a.timestamp - b.timestamp;
+            });
+
+            if (filtered.length === 0) {
+                showToast("No updates to export!");
+                return;
+            }
+
+            // Construct CSV rows
+            const csvRows = [];
+            // Header
+            csvRows.push(["Date", "Type", "Link", "Update Content"].map(field => `"${field.replace(/"/g, '""')}"`).join(","));
+            
+            filtered.forEach(update => {
+                const row = [
+                    update.date,
+                    update.type,
+                    update.link,
+                    update.text.replace(/\r?\n|\r/g, ' ') // clean newlines
+                ];
+                csvRows.push(row.map(field => `"${field.replace(/"/g, '""')}"`).join(","));
+            });
+
+            const csvString = csvRows.join("\r\n");
+            const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", `bigquery_releases_${activeCategory}_${new Date().toISOString().slice(0, 10)}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast("CSV exported successfully!");
+        });
+    }
 
     // 10. Refresh & Retry Buttons
     refreshBtn.addEventListener('click', () => {
