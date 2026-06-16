@@ -1,0 +1,20 @@
+# Standalone environments and temporary tools
+.python-standalone/
+gh_2.94.0_macOS_arm64/
+venv/
+
+# Python caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# OS specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
