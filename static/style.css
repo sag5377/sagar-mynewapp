@@ -40,6 +40,160 @@
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Light Theme Color Scheme Overrides */
+body.light-theme {
+    --bg-primary: #f3f4f6;
+    --bg-secondary: #e5e7eb;
+    --card-bg: rgba(255, 255, 255, 0.75);
+    --card-border: rgba(15, 23, 42, 0.08);
+    --card-border-hover: rgba(99, 102, 241, 0.5);
+    
+    /* Text Colors */
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    
+    /* Glow Effects (softer for light mode) */
+    --glow-indigo: 0 0 15px rgba(99, 102, 241, 0.1);
+    --glow-cyan: 0 0 15px rgba(6, 182, 212, 0.1);
+}
+
+body.light-theme .bg-gradient-overlay {
+    background-image: 
+        radial-gradient(at 10% 20%, rgba(99, 102, 241, 0.04) 0px, transparent 50%),
+        radial-gradient(at 90% 80%, rgba(6, 182, 212, 0.04) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(139, 92, 246, 0.01) 0px, transparent 70%);
+}
+
+/* Theme Toggle Button Style */
+.theme-toggle-btn {
+    background: rgba(15, 20, 34, 0.4);
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition-smooth);
+}
+
+.theme-toggle-btn:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+    background: rgba(15, 20, 34, 0.8);
+    transform: scale(1.05);
+}
+
+body.light-theme .theme-toggle-btn {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(15, 23, 42, 0.1);
+    color: #475569;
+}
+
+body.light-theme .theme-toggle-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+body.light-theme .custom-select,
+body.light-theme #search-input {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(15, 23, 42, 0.1);
+    color: #0f172a;
+}
+
+body.light-theme #search-input:focus {
+    border-color: var(--accent-indigo);
+    background: white;
+}
+
+body.light-theme .capsule {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(15, 23, 42, 0.1);
+    color: #475569;
+}
+
+body.light-theme .capsule:hover {
+    border-color: rgba(15, 23, 42, 0.2);
+    color: #0f172a;
+}
+
+body.light-theme .capsule.active {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: var(--accent-indigo);
+    color: #4f46e5;
+}
+
+body.light-theme .last-synced-wrapper {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(15, 23, 42, 0.05);
+    color: #475569;
+}
+
+body.light-theme .action-icon-btn {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(15, 23, 42, 0.1);
+    color: #475569;
+}
+
+body.light-theme .action-icon-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+body.light-theme .action-icon-btn.tweet-btn-trigger {
+    background: rgba(99, 102, 241, 0.1);
+    color: #4f46e5;
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+body.light-theme .action-icon-btn.tweet-btn-trigger:hover {
+    background: var(--accent-indigo);
+    color: white;
+}
+
+body.light-theme .card-body-content code {
+    background: rgba(15, 23, 42, 0.06);
+    border-color: rgba(15, 23, 42, 0.08);
+    color: #0f172a;
+}
+
+body.light-theme .modal-card {
+    background: #f8fafc;
+    border-color: rgba(15, 23, 42, 0.1);
+    color: #0f172a;
+}
+
+body.light-theme .modal-header,
+body.light-theme .modal-footer {
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .modal-body {
+    background: #f1f5f9;
+}
+
+body.light-theme .x-post-mockup .x-post-avatar {
+    color: white;
+}
+
+body.light-theme #tweet-textarea {
+    color: #0f172a;
+}
+
+body.light-theme .x-post-link-preview {
+    background: white;
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .x-post-link-preview .link-title {
+    color: #0f172a;
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
