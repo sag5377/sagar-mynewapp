@@ -47,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toast-message');
 
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+
     // Initialize circular progress ring
     const radius = 14;
     const circumference = radius * 2 * Math.PI;
@@ -507,6 +510,36 @@ document.addEventListener('DOMContentLoaded', () => {
             link.click();
             document.body.removeChild(link);
             showToast("CSV exported successfully!");
+        });
+    }
+
+    // Theme Toggle Logic
+    if (themeToggle) {
+        const themeIcon = themeToggle.querySelector('.theme-icon');
+        
+        // Check local storage for theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+            if (themeIcon) {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
+            
+            if (themeIcon) {
+                if (isLight) {
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                }
+            }
+            
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            showToast(isLight ? "Switched to Light Mode!" : "Switched to Dark Mode!");
         });
     }
 
